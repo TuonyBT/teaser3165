@@ -12,10 +12,14 @@ fn main() {
         } 
         for b in 1 .. a {
             let mut mult: bool = false;
-            let m = a + b;
-            if m % 14 == 0 {
+            let n = a + b;
+            if n % 14 == 0 {
                 mult = true;
             } 
+            if [sq, mult] == [true, true] {
+                println!("a: {}; b: {}; m: {}", a, b, (a + b) / 14);
+            }
+
             let s = ((a.pow(2) + b.pow(2)) as f64) / a as f64 / 2.0; 
             if s % 1.0 == 0.0 {
                 let r = a - s as i32;
@@ -44,14 +48,22 @@ fn main() {
         println!();
     }
 
-    for m in 4i32..5 {
+    for m in 1i32..5 {
         let a = m * m * 2;
-        let b = m * 14 - a;
-        let s = ((a.pow(2) + b.pow(2)) as f64) / a as f64 / 2.0; 
-        let r = a - s as i32;
-        let de_sq = b.pow(2) + (a - 2 * r).pow(2);
-        let de = (de_sq as f64).powf(0.5) ;
-        let perimeter_lost = (2.0 * s - de) * 14.0 / (a + b) as f64;
-        println!("a: {}, b: {}, m: {}, s: {}, r: {}, de: {}, perimeter lost: {}", a, b, m, s, r, de, perimeter_lost);
+        let mut n_ = a / 14;
+        let mut b = n_ * 14 - a;
+        while b < a {
+            if b > 0 {
+                let s = ((a.pow(2) + b.pow(2)) as f64) / a as f64 / 2.0; 
+                let r = a as f64 - s;
+                let de_sq = (b as f64).powf(2.0) + (a as f64 - 2.0 * r).powf(2.0);
+                let de = (de_sq as f64).powf(0.5) ;
+                let perimeter_lost = (2.0 * s - de) * 14.0 / (a + b) as f64;
+                println!("a: {}, b: {}, m: {}, s: {}, r: {}, de: {}, perimeter lost: {}", a, b, m, s, r, de, perimeter_lost);
+   
+            }
+            n_ += 1;
+            b = n_ * 14 - a;
+        }
     }
 }
