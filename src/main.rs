@@ -52,9 +52,6 @@ fn main() {
         let de_sq = b.pow(2) + (a - 2 * r).pow(2);
         let de = (de_sq as f64).powf(0.5) ;
         let perimeter_lost = (2.0 * s - de) * 14.0 / (a + b) as f64;
-
-
-
         println!("a: {}, b: {}, m: {}, s: {}, r: {}, de: {}, perimeter lost: {}", a, b, m, s, r, de, perimeter_lost);
     }
 }
